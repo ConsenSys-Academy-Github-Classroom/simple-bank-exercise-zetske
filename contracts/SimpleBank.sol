@@ -44,7 +44,7 @@ contract SimpleBank {
     /// @notice Deposit ether into bank
     /// @return The balance of the user after the deposit is made
     function deposit() public payable returns (uint) {
-      require(enrolled[msg.sender] == true, 'Users should be enrolled');
+      require(enrolled[msg.sender] == true, 'user should be enrolled');
       balances[msg.sender] += msg.value;
       emit LogDepositMade(msg.sender, msg.value);
       return getBalance();
@@ -55,7 +55,7 @@ contract SimpleBank {
     /// @param withdrawAmount amount you want to withdraw
     /// @return The balance remaining for the user
     function withdraw(uint withdrawAmount) public returns (uint) {
-      require(withdrawAmount <= getBalance(), 'ensure sender has enough funds');
+      require(withdrawAmount <= getBalance(), 'sender does not have enough funds');
       balances[msg.sender] -= withdrawAmount;
       msg.sender.transfer(withdrawAmount);
       emit LogWithdrawal(msg.sender, withdrawAmount, getBalance());
